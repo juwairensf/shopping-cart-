@@ -14,6 +14,8 @@ const uglify=require("gulp-uglify");
 const babel=require("gulp-babel");
 //css压缩插件
 const cleanCss=require("gulp-clean-css");
+//sass编译插件
+const sass=require("gulp-sass-china");
 gulp.task('connect',function(){
 	connect.server({
 		port:8888,
@@ -28,11 +30,17 @@ gulp.task('connect',function(){
 	})
 });
 
+gulp.task("sass",()=>{
+	return gulp.src(["sass/*.scss"])
+	.pipe(sass().on("error",sass.logError))
+	.pipe(gulp.dest("dist/css"));
+})
 gulp.task("html",()=>{
 	return gulp.src("*html").pipe(gulp.dest("dist/")).pipe(connect.reload());
 })
 gulp.task("watch",()=>{
-	gulp.watch("index.html",["html"]);
+	gulp.watch("index.html",["html","sass"]);
+	gulp.watch("sass/*.scss",["html","sass"]);
 })
 gulp.task("default",["watch","connect"])
 

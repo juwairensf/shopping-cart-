@@ -1,0 +1,162 @@
+//是css预编译器；
+//目的还是写css；
+//支持变量 函数 逻辑 色值运算；
+
+//引入_mixin.scss;
+@import "_mixin.scss";
+//引入_function.scss;
+@import "_function.scss";
+
+//变量；
+//统一更改；
+// $color:#ddd;
+// body{
+//     background: $color;
+// }
+//sass完整支持css；
+//css可以随意的写在sass文件里；
+// .box1{
+//     background: $color;
+// }
+// .box2{
+//     background: $color;
+// }
+// .box3{
+//     background: $color;
+// }
+
+$color:#00f;
+body{
+    // background: $color;
+    background: $color - 20;//颜色运算；
+    color:$color;
+}
+// .box{
+//     width: 100px;
+//     height: 100px;
+//     background: #000;
+//     // -webkit-transform: rotate(30deg);
+//     // -ms-transform: rotate(30deg);
+//     // -o-transform: rotate(30deg);
+//     // -moz-transform: rotate(30deg);
+//     // transform: rotate(30deg);
+//     // @include transform();
+//     @include transform(rotate(50deg));
+//     //@include transition(all .5s);
+//     @include transition;
+// }
+
+// //先定义再调用；
+
+
+// .box2{
+//     width: 200px;
+//     height: 200px;
+//     background: pink;
+//     @include transform(rotate(30deg));
+//     @include transition(all .5s);
+// }
+
+//函数；
+// .box{
+//     width: 100px;
+//     height: 100px;
+//     background: pink;
+//     span{
+//         color:deeppink;
+//     }
+//     &:hover{
+//         @include transform(rotate(45deg));
+//         @include transition;
+//     }
+//     strong{
+//         color:deepskyblue;
+//     }
+// }
+
+
+// .box2{
+//     // width: (100/16)*1rem;
+//     width: pxToRem(100px);
+//     height: pxToRem(100px);
+//     // height: (100/16)*1rem;
+//     background: darkgoldenrod;
+// }
+
+//循环
+//sass里面的数组；(复合变量)
+//sass给我们提供了非常多的方法；
+//nth()方法，相当于一个下标的使用；
+//$list:10px 20px;
+// .box{
+//     width: 150px;
+//     height: 100px;
+//     background: deeppink;
+//     span{
+//         //font-size: $list;
+//         font-size: nth($list,2);
+//     }
+// }
+
+//复杂循环；
+$list:(box 10px) (box2 20px) (box3 30px);
+// .box{
+//     width: 200px;
+//     height: 100px;
+//     background: deeppink;
+//     span{
+//         font-size: nth(nth($list,1),2);
+//     }
+// }
+
+
+// @each $class in $list{
+//     #{$class}{
+//         font-size:10px;
+//     }
+// }
+
+// @each $class,$size in $list{
+//     #{$class}{
+//         font-size:$size;
+//     }
+// }
+
+//@at-root 跳出包围；
+// .box{
+//     width: 100px;
+//     height: 100px;
+//     background: deeppink;
+//     span{
+//         font-size: 16px;
+//         @at-root strong{
+//             font-size: 10px;
+//         }
+//     }
+// }
+
+//@media媒体查询；
+// .box{
+//     background: deeppink;
+//     width: 300px;
+//     @media screen and(max-width:500px) {
+//         width: 200px;
+//     }
+// }
+
+
+//@extend 继承；
+.box{
+        width: 200px;
+        height: 100px;
+        margin-top: 10px;
+        background: deeppink;
+        span{
+            font-size: nth(nth($list,1),2);
+        }
+    }
+    
+    
+.box2{
+    @extend .box;
+}
